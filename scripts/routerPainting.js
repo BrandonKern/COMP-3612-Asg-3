@@ -4,10 +4,10 @@ const artists = data.artistData;
 const galleries = data.galleryData;
 
 const handlePaintingAll = app => {
-    app.get('/paintings', (req,resp) => { resp.json(paintings) } ); 
+    app.get('/api/paintings', (req,resp) => { resp.json(paintings) } ); 
 };
 
-const handlePaintingById = app => {app.get('/painting/:id', (req, resp) => {
+const handlePaintingById = app => {app.get('/api/painting/:id', (req, resp) => {
     const match = paintings.find((p) => p.paintingID == req.params.id);
     if (match)
     resp.json(match);
@@ -17,7 +17,7 @@ const handlePaintingById = app => {app.get('/painting/:id', (req, resp) => {
 };
 
 const handlePaintingByGalleryId = app => {
-    app.get('/painting/gallery/:id', (req,resp) => {  
+    app.get('/api/painting/gallery/:id', (req,resp) => {  
         const galleryId = req.params.id;
         const matches = paintings.filter(p => p.gallery.galleryID == galleryId);
         if (matches.length > 0) 
@@ -28,7 +28,7 @@ const handlePaintingByGalleryId = app => {
 };
 
 const handlePaintingByArtistId = app => {
-    app.get('/painting/artist/:id', (req, resp) => {
+    app.get('/api/painting/artist/:id', (req, resp) => {
         const artistId = req.params.id;
         const matches = paintings.filter(p => p.artist.artistID == artistId);
         if (matches.length > 0) 
@@ -39,7 +39,7 @@ const handlePaintingByArtistId = app => {
 };
 
 const handlePaintingByYear = app => {
-    app.get('/painting/year/:min/:max', (req, resp) => {
+    app.get('/api/painting/year/:min/:max', (req, resp) => {
         const minYear = req.params.min;
         const maxYear = req.params.max;
         const matches = paintings.filter(p => p.yearOfWork >= minYear && p.yearOfWork <= maxYear);
@@ -51,7 +51,7 @@ const handlePaintingByYear = app => {
 };
 
 const handlePaintingByText = app => {
-    app.get('/painting/title/:text', (req, resp) => {
+    app.get('/api/painting/title/:text', (req, resp) => {
         const text = (req.params.text).toUpperCase();
         const matches = paintings.filter(p => ((p.title).toUpperCase()).includes(text));
         if (matches.length > 0)
@@ -62,7 +62,7 @@ const handlePaintingByText = app => {
 }
 
 const handlePaintingByName = app => {
-    app.get('/painting/color/:name', (req, resp) => {
+    app.get('/api/painting/color/:name', (req, resp) => {
         const name = (req.params.name).toUpperCase();
         const matches = paintings.filter((p) => {
             for (let c of p.details.annotation.dominantColors) {
@@ -79,11 +79,11 @@ const handlePaintingByName = app => {
 }
 
 const handleArtistAll = app => {
-    app.get('/artists', (req,resp) => { resp.json(artists) } );
+    app.get('/api/artists', (req,resp) => { resp.json(artists) } );
 }
 
 const handleArtistByCountry = app => {
-    app.get('/artists/:country', (req, resp) => {
+    app.get('/api/artists/:country', (req, resp) => {
         const country = req.params.country;
         const matches = artists.filter(p => p.Nationality.toUpperCase() == country.toUpperCase());
         if (matches.length > 0) 
@@ -94,11 +94,11 @@ const handleArtistByCountry = app => {
 }
 
 const handleGalleryAll = app => {
-    app.get('/galleries', (req,resp) => { resp.json(galleries) } ); 
+    app.get('/api/galleries', (req,resp) => { resp.json(galleries) } ); 
 }
 
 const handleGalleryByCountry = app => {
-    app.get('/galleries/:country', (req, resp) => {
+    app.get('/api/galleries/:country', (req, resp) => {
         const country = req.params.country;
         const matches = galleries.filter(p => p.GalleryCountry.toUpperCase() == country.toUpperCase());
         if (matches.length > 0) 
