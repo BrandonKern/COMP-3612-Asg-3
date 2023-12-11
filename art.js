@@ -18,7 +18,7 @@ router.handleArtistByCountry(app);
 router.handleGalleryAll(app);
 router.handleGalleryByCountry(app);
 
-let port = 5500;
+let port = 8080;
 app.listen(port, () => {
     console.log("server running at port = " + port);
 })
